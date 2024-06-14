@@ -13,6 +13,25 @@
 const express = require('express') //importando libreria
 const app = express() //Iniacializalizamos la variable libreria  -variable con todo lo necesario pra el proyecto
 const port = 3000 //definimos puerto a usar puede ser 8080
+const mongoose = requiere ('mongoose');//importando libreria
+
+// obtengo la cadena de conexion del archivo .env
+requiere('dotenv').config()
+const DB_CONNECTION = process.env.DB_CONNECTION || '' 
+mongoose.connect (DB_CONNECTION) //creo cadena de conexion
+
+//coneccion prestada por el profe
+//mongoose.connect ("mongodb+srv://msanchez:Qa5diWRtyuVRy3Bb@cluster0.1tpxkve.mongodb.net/talentotech2")
+
+
+//Importamos las rutas del otro archivo
+app.use(express.urlencoded)
+const UserRoutes = requiere( './routers/userRoutes')
+app.use ( '/', UserRoutes)
+
+// taller de carros
+const CarroRoutes = requiere( './routers/carrosRoutes')
+app.use ( '/', CarroRoutes)
 
 // Creamos servicio web
 //Funcionalidad de nuesta API
@@ -124,4 +143,16 @@ app.listen(port, () => {
     console.log("listen on" + port)
 
 })
- // esto es e backend o la parte de atras de las paginas web
+
+
+
+
+
+
+
+
+
+
+
+
+ // todo esto es como el backend o la parte de atras de las paginas web
