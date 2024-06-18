@@ -9,35 +9,42 @@
  //   console.log("No puede votar")
 //}
 
-// configuracion de >Express
-const express = require('express') //importando libreria
+// configuracion de >Express //importando libreria
+const express = require('express') 
 const app = express() //Iniacializalizamos la variable libreria  -variable con todo lo necesario pra el proyecto
 const port = 3000 //definimos puerto a usar puede ser 8080
-const mongoose = requiere ('mongoose');//importando libreria
+const mongoose = require('mongoose');//importando libreria
 
 // obtengo la cadena de conexion del archivo .env
-requiere('dotenv').config()
-const DB_CONNECTION = process.env.DB_CONNECTION || '' 
-mongoose.connect (DB_CONNECTION) //creo cadena de conexion
+require('dotenv').config()
+const DB_CONNECTION = process.env.DB_CONNECTION || ''
+mongoose.connect(DB_CONNECTION) //creo cadena de conexion
 
 //coneccion prestada por el profe
 //mongoose.connect ("mongodb+srv://msanchez:Qa5diWRtyuVRy3Bb@cluster0.1tpxkve.mongodb.net/talentotech2")
 
 
+//Agregamos la configuracion del cors -permiso para paginas web
+const cors = require('cors')
+app.use(cors());
+
+
 //Importamos las rutas del otro archivo
-app.use(express.urlencoded)
-const UserRoutes = requiere( './routers/userRoutes')
-app.use ( '/', UserRoutes)
+app.use(express.urlencoded({extended: true})) // Acceder a la informacion de las urls
+app.use(express.json()) // Analizar informacion en formato JSON
+
+const UserRoutes = require('./routes/UserRoutes')
+app.use('/', UserRoutes)
 
 // taller de carros
-const CarroRoutes = requiere( './routers/carrosRoutes')
-app.use ( '/', CarroRoutes)
+const CarroRoutes = require('./routes/CarroRoutes')
+app.use('/', CarroRoutes)
 
-// Creamos servicio web
-//Funcionalidad de nuesta API
-// [get, post, put ,patch, delete]
-//res = Response = Respuesta
-// req = Request = Información de enntrada
+/* Creamos servicio web
+Funcionalidad de nuestra API
+[get, post, put ,patch, delete]
+res = Response = Respuesta
+req = Request = Información de enntrada*/
 // definimos metodo  creamos servicio web // enviamos mensaje // nombre de la pagina "/" podemos colocar cualquier nombre despues del / que es la raiz
 app.get('/ ', (req, res)  => {
     //muestra en pantalla hello World
@@ -110,10 +117,16 @@ app.get('/mascotas/:tipo', (req, res)  =>{
     }else if(tipo == "sepiente"){
         animal = "ZZZZZZ"
     }else {
-        animal = "No conoxco el animal"
+        animal = "No conozco el animal"
     }
 
     res.send(animal)
+})
+
+// API REST
+// Solicitud get
+app.get('/usuario', (req, res) => {
+    res.send("Estoy consultando un usuario")
 })
 // solicitud por post crear usuario
 app.post('/usuario', (req, res) => {
@@ -133,7 +146,7 @@ app.patch('/usuario', (req, res) => {
 })
 
 // solicitud por Delete /eliminar usuario
-app.get('/usuario', (req, res) => {
+app.delete('/usuario', (req, res) => {
     res.send("estoy eliminando un usuario ")
 
 })

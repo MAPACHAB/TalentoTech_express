@@ -1,6 +1,6 @@
 const express = require('express') //importando libreria
 const app = express() //Iniacializalizamos la variable libreria  -variable con todo lo necesario pra el proyecto
-const carroController = require("../controller/carroController") //importando el controlador 
+const carroController = require("../controllers/carroController") //importando el controlador 
 const controller  = UsuarioController(); //creando una instancia
 
 //Creamos nuestros servicios web

@@ -1,6 +1,6 @@
-const mongoose = requiere("mongoose") //importa libreria mongoose
+const mongoose = require('mongoose'); //importa libreria mongoose
 //sintaxis
-const carroSchema = new mongoose.Schema({
+const CarroSchema = new mongoose.Schema({
     modelo:{
         type: Number,
         requiered: true,
@@ -17,7 +17,7 @@ const carroSchema = new mongoose.Schema({
         unique: true,
         validate: {
             validator: function(placa){
-            return /^[A-Z]{3}\d{3}$/.test(placa); //cadena de validacion para placas
+            return /^[A-Z]{3}\d{3}$/.test(placa); //cadena de validacion para placas, mediante una expresion regular
             },
             message: props => props.value + "no es valida la placa"
         }
@@ -53,8 +53,8 @@ const carroSchema = new mongoose.Schema({
             },
             message: props => props.value + " la capacidad no es valida "
         }     
-    } //cuando es la uitima propiedad no es necesaria cerrar con coma
+    } //cuando es la ultima propiedad no es necesaria cerrar con coma
    
 })
 
-module.exports = mongoose.model('carro', carroSchema) //llamamos el esquema carroSchema
+module.exports = mongoose.model('carro', CarroSchema) //llamamos el esquema CarroSchema
