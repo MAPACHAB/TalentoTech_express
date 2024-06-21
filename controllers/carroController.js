@@ -1,4 +1,4 @@
-const CarroSchema = require( "../models/Carro") //accedemos a los datos del pruyecto
+const CarroSchema = require( "../models/carro") //accedemos a los datos del pruyecto
 
 class CarroController{
    
