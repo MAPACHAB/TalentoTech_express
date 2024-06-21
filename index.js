@@ -48,7 +48,7 @@ req = Request = Información de enntrada*/
 // definimos metodo  creamos servicio web // enviamos mensaje // nombre de la pagina "/" podemos colocar cualquier nombre despues del / que es la raiz
 app.get('/ ', (req, res)  => {
     //muestra en pantalla hello World
-    res.send("Hello World")
+   // res.send("Hello World")
 
 })
 

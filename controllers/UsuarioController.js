@@ -1,4 +1,4 @@
-const UserSchema = require("../models/Usuario") // Accedemos a los datos del modelo
+const UserSchema = require("../models/usuario") // Accedemos a los datos del modelo
 const bcrypt = require('bcrypt') // Importamos la libreria de encriptacion
 const jwt = require('jsonwebtoken')
 
@@ -9,7 +9,7 @@ class UsuarioController{
     //creacmos funcion async y await deben ir juntos para la sincronia
   async getUsuarios(req, res) {
         var usuario = await UserSchema.find();
-       
+        res.send(usuario)
     }
 
     //obtenemos los datos del usuario
@@ -39,7 +39,7 @@ class UsuarioController{
         }
            
 
-      // res.send ("Guardado Corecctamente")
+      // res.send ("Guardado Corectamente")
     
 
     async getUsuarioById(req, res){
